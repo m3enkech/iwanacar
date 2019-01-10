@@ -1,0 +1,36 @@
+// install laravel 
+composer create-project --prefer-dist laravel/laravel projectName
+//install infyom laravel generator
+
+//publish command 
+php artisan vendor:publish
+php artisan infyom:publish
+php artisan infyom.publish:layout 
+
+// create migration file
+php artisan make:migration create_bookings_table
+
+// migration cmd
+php artisan migrate / options :refresh --force
+
+//creating models infyom based on created tables 
+php artisan infyom:scaffold Booking --fromTable --tableName=bookings
+
+// route Modal
+Route::post('/bookings/addClient', 
+    [ 'as' => 'bookings.addClient', 
+      'uses' => 'bookingController@addClient'
+    ]);
+//
+
+////////////////////// if AUth
+		if (Auth::check()) {
+
+  		}
+        else {
+            return $request->expectsJson()
+                ? response()->json(['message' => $exception->getMessage()], 401)
+                : redirect()->guest(route('login'));
+        }
+
+////////////////
